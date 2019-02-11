@@ -7,6 +7,10 @@
 
 
 class Job < ApplicationRecord
-  has_many :posters, class_name: 'User'
-  has_many :accepters, class_name: 'User'
+  belongs_to :poster, class_name: "User"
+  belongs_to :mover, class_name: "User"
+  has_many :furniture_jobs
+  has_many :furnitures, through: :furniture_jobs
+
+
 end
