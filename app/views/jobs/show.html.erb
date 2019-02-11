@@ -15,5 +15,22 @@
   <%= @job.status %>
 </p>
 
+<p>
+  <strong>Furnitures:</strong>
+  <% @job.furnitures.each do |furn| %>
+    <%= furn.category %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Mover:</strong>
+  <%= @job.mover.name %>
+</p>
+
+<p>
+  <strong>Poster:</strong>
+  <%= @job.poster.name %>
+</p>
+
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>
