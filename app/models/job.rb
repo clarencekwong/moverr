@@ -1,5 +1,8 @@
 class Job < ApplicationRecord
-  has_many :reviews
-  has_many :furnitures
-  has_many :jobs, through: :furnitures
+  belongs_to :poster, class_name: "User"
+  belongs_to :mover, class_name: "User"
+  has_many :furniture_jobs
+  has_many :furnitures, through: :furniture_jobs
+
+
 end

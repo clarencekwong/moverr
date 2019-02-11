@@ -1,4 +1,4 @@
 class Furniture < ApplicationRecord
-  belongs_to :user
-  belongs_to :job
+  has_many :furniture_jobs
+  has_many :jobs, through: :furniture_jobs
 end
