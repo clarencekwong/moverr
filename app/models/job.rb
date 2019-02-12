@@ -1,3 +1,11 @@
+# class Job < ApplicationRecord
+#   has_many :reviews
+#   has_many :furnitures
+#   has_many :jobs, through: :furnitures
+# end
+
+
+
 class Job < ApplicationRecord
   belongs_to :poster, class_name: "User"
   belongs_to :mover, class_name: "User"
