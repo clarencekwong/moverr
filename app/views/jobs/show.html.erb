@@ -24,7 +24,9 @@
 
 <p>
   <strong>Mover:</strong>
-  <%= @job.mover.name %>
+  <% if @job.mover %>
+    <%= @job.mover.name %>
+  <% end %>
 </p>
 
 <p>

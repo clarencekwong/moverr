@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+10.times do
+  User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create(Faker::Creature::Animal.name), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::String.random, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
+end

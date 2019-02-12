@@ -1,6 +1,7 @@
 class MainsController < ApplicationController
 
   def home
+    @user = User.find(session[:user_id])
   end
 
   def login

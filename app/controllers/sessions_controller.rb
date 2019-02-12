@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(username: params[:user][:username])
-    byebug
     @user = @user.try(:authenticate, params[:user][:password])
     if @user.save
       session[:user_id] = @user.id
@@ -18,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete :username
+    session.delete :user_id
     redirect_to '/login'
   end
 
