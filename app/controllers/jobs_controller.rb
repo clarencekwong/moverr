@@ -58,6 +58,17 @@ class JobsController < ApplicationController
     redirect_to @job
   end
 
+  def complete
+    @job = Job.find(params[:id])
+    @job.status = "Completed"
+    @job.save
+    redirect_to @job
+  end
+
+  def self
+
+  end
+
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy

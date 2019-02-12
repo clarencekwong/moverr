@@ -40,6 +40,10 @@
 
 <%= session[:user_id] %>
 
-<% if @job.poster.id != session[:user_id] && !@job.mover %>
+<% if @job.poster.id != session[:user_id] && !@job.mover && @job.status == 'Pending' %>
   <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch %>
+<% end %>
+
+<% if @job.poster.id == session[:user_id] && @job.status == 'Accepted' %>
+  <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch %>
 <% end %>
