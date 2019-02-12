@@ -10,3 +10,14 @@
 10.times do
   User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create(Faker::Creature::Animal.name), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::String.random, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
 end
+
+Furniture.create(category: "Sofa")
+Furniture.create(category: "Television")
+Furniture.create(category: "Bed")
+Furniture.create(category: "Chair")
+Furniture.create(category: "Shelf")
+Furniture.create(category: "Lamp")
+Furniture.create(category: "Table")
+Furniture.create(category: "Plant(s)")
+Furniture.create(category: "Curtain(s)")
+Furniture.create(category: "Storage container")

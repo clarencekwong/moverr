@@ -24,7 +24,6 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
-    byebug
     @job = Job.new(job_params)
     respond_to do |format|
       if @job.save
@@ -49,6 +48,14 @@ class JobsController < ApplicationController
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def accept
+    @job = Job.find(params[:id])
+    @job.mover_id = session[:user_id]
+    @job.status = "Accepted"
+    @job.save
+    redirect_to @job
   end
 
   # DELETE /jobs/1
