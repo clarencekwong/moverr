@@ -65,8 +65,11 @@ class JobsController < ApplicationController
     redirect_to @job
   end
 
-  def self
-
+  def my_jobs
+    @jobs = Job.all.select do |job|
+      job.mover_id == session[:user_id] || job.poster_id == session[:user_id]
+    end
+    render :index
   end
 
   # DELETE /jobs/1
