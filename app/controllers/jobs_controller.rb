@@ -66,6 +66,13 @@ class JobsController < ApplicationController
     redirect_to @job
   end
 
+  def cancel
+    @job = Job.find(params[:id])
+    @job.status = "Canceled"
+    @job.save
+    redirect_to @job
+  end
+
   def my_jobs
     @posted_jobs = Job.all.select do |job|
       job.poster_id == session[:user_id]

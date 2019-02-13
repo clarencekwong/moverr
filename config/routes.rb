@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :reviews
   patch '/jobs/:id/accept', to: 'jobs#accept', as: 'accept'
   patch '/jobs/:id/complete', to: 'jobs#complete', as: 'complete'
+  patch '/jobs/:id/cancel', to: 'jobs#cancel', as: 'cancel' 
   get '/jobs/my-jobs', to: 'jobs#my_jobs', as: 'my-jobs'
   resources :jobs
   resources :furnitures, only: [:new, :index]

@@ -47,3 +47,7 @@
 <% if @job.poster.id == session[:user_id] && @job.status == 'Accepted' %>
   <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch %>
 <% end %>
+
+<% if @job.poster.id == session[:user_id] %>
+  <%= button_to "Cancel Job", cancel_path(@job), action: 'cancel', method: :patch %>
+<% end %>
