@@ -15,13 +15,9 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
-        <td><%= job.title %></td>
-        <td><%= job.date %></td>
-        <td><%= job.status %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <td><%= link_to job.title, job %></td>
+        <td><%= link_to job.date, job %></td>
+        <td><%= link_to job.status, job %></td>
     <% end %>
   </tbody>
 </table>

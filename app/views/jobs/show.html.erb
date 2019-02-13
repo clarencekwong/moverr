@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
-<% if @job.poster.id == session[:user_id] %>
+<% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
   Your
 <% else %>
   <%= @job.poster.name %>'s
