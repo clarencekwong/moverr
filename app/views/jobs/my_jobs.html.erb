@@ -17,7 +17,7 @@
     <% @posted_jobs.each do |job| %>
       <tr>
         <td><%= link_to job.title, job %></td>
-        <td><%= link_to job.date, job %></td>
+        <td><%= link_to job.date.time.strftime("%b %d, %Y at %I:%M%P"), job %></td>
         <td><%= link_to job.status, job %></td>
       </tr>
     <% end %>
@@ -43,7 +43,7 @@
     <% @accepted_jobs.each do |job| %>
     <tr>
       <td><%= link_to job.title, job %></td>
-      <td><%= link_to job.date, job %></td>
+      <td><%= link_to job.date.time.strftime("%b %d, %Y at %I:%M%P"), job %></td>
       <td><%= link_to job.status, job %></td>
     </tr>
     <% end %>

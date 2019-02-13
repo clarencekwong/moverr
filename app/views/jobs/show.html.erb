@@ -16,7 +16,7 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @job.date %>
+  <%= @job.date.time.strftime("%b %d, %Y at %I:%M%P") %>
 </p>
 
 <p>
