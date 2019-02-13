@@ -1,5 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<h1>
+<% if @job.poster.id == session[:user_id] %>
+  Your
+<% else %>
+  <%= @job.poster.name %>'s
+<% end %>
+<%= @job.status %> Job
+</h1>
+
 <p>
   <strong>Title:</strong>
   <%= @job.title %>
@@ -25,7 +34,7 @@
 <% if @job.mover && @job.mover.id != session[:user_id] %>
   <p>
     <strong>Mover:</strong>
-      <%= @job.mover.name %>
+      <%= @job.mover.name %> <%= link_to "(profile)", user_path(@job.mover) %>
   </p>
 <% elsif @job.mover && @job.mover.id == session[:user_id] %>
 <p>
@@ -37,7 +46,7 @@
 <% if @job.poster.id != session[:user_id] %>
   <p>
     <strong>Poster:</strong>
-      <%= @job.poster.name %>
+      <%= @job.poster.name %> <%= link_to "(profile)", user_path(@job.poster) %>
   </p>
 <% elsif @job.poster.id == session[:user_id] %>
 <p>
@@ -46,21 +55,17 @@
 </p>
 <% end %>
 
-<% if @job.mover && @job.mover.id == session[:user_id] %>
+<% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
   <p>
     <strong> Address:</strong>
       <%= @job.poster.address %>
-  </p>
-  <p>
-    <strong> Poster's profile:</strong>
-      <%= link_to @job.poster.name, user_path(@job.poster) %>
   </p>
 <% end %>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>
 
-<% if @job.poster.id != session[:user_id] && !@job.mover && @job.status == 'Pending' %>
+<% if @job.poster.id != session[:user_id] && @job.status == 'Pending' %>
   <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch %>
 <% end %>
 
@@ -68,6 +73,10 @@
   <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch %>
 <% end %>
 
-<% if @job.poster.id == session[:user_id] %>
+<% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) && @job.status != "Canceled" %>
   <%= button_to "Cancel Job", cancel_path(@job), action: 'cancel', method: :patch %>
+<% end %>
+
+<% if @job.poster.id == session[:user_id] && @job.status == "Canceled" %>
+  <%= button_to "Job's Back On", uncancel_path(@job), action: 'uncancel', method: :patch %>
 <% end %>

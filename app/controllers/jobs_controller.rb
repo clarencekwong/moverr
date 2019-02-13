@@ -68,7 +68,23 @@ class JobsController < ApplicationController
 
   def cancel
     @job = Job.find(params[:id])
-    @job.status = "Canceled"
+    if @job.poster.id == session[:user_id]
+      @job.status = "Canceled"
+    elsif @job.mover.id == session[:user_id]
+      @job.status = "Pending"
+      @job.mover = nil
+    end
+    @job.save
+    redirect_to @job
+  end
+
+  def uncancel
+    @job = Job.find(params[:id])
+    if @job.mover
+      @job.status = "Accepted"
+    else
+      @job.status = "Pending"
+    end
     @job.save
     redirect_to @job
   end
