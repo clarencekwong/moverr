@@ -22,18 +22,40 @@
   <% end %>
 </p>
 
+<% if @job.mover && @job.mover.id != session[:user_id] %>
+  <p>
+    <strong>Mover:</strong>
+      <%= @job.mover.name %>
+  </p>
+<% elsif @job.mover && @job.mover.id == session[:user_id] %>
 <p>
   <strong>Mover:</strong>
-  <% if @job.mover %>
-    <%= @job.mover.name %>
-  <% end %>
+    You!
 </p>
+<% end %>
 
+<% if @job.poster.id != session[:user_id] %>
+  <p>
+    <strong>Poster:</strong>
+      <%= @job.poster.name %>
+  </p>
+<% elsif @job.poster.id == session[:user_id] %>
 <p>
   <strong>Poster:</strong>
-  <%= @job.poster.name %>
+    You!
 </p>
+<% end %>
 
+<% if @job.mover && @job.mover.id == session[:user_id] %>
+  <p>
+    <strong> Address:</strong>
+      <%= @job.poster.address %>
+  </p>
+  <p>
+    <strong> Poster's profile:</strong>
+      <%= link_to @job.poster.name, user_path(@job.poster) %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>
