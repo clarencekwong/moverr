@@ -22,12 +22,35 @@
     <strong>Address:</strong>
     <%= @user.address %>
   </p>
+  <p>
+    <strong>Phone Number:</strong>
+    <%= @user.phone_number %>
+  </p>
 <% end %>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
 
 <p>
   <strong>Bio:</strong>
   <%= @user.bio %>
 </p>
 
+<p>
+  <strong>Jobs Posted:</strong>
+  <%= @user.jobs_posted %>
+</p>
+
+<p>
+  <strong>Jobs Moved:</strong>
+  <%= @user.jobs_moved %>
+</p>
+
+<p>
+  <strong>Average Rating:</strong>
+  <%= @user.user_rating %>
+</p>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
