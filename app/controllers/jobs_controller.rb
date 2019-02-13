@@ -66,11 +66,39 @@ class JobsController < ApplicationController
     redirect_to @job
   end
 
-  def my_jobs
-    @jobs = Job.all.select do |job|
-      job.mover_id == session[:user_id] || job.poster_id == session[:user_id]
+  def cancel
+    @job = Job.find(params[:id])
+    if @job.poster.id == session[:user_id]
+      @job.status = "Canceled"
+    elsif @job.mover.id == session[:user_id]
+      @job.status = "Pending"
+      @job.mover = nil
     end
-    render :index
+    @job.save
+    redirect_to @job
+  end
+
+  def uncancel
+    @job = Job.find(params[:id])
+    if @job.mover
+      @job.status = "Accepted"
+    else
+      @job.status = "Pending"
+    end
+    @job.save
+    redirect_to @job
+  end
+
+  def my_jobs
+    @posted_jobs = Job.all.select do |job|
+      job.poster_id == session[:user_id]
+    end
+
+    @accepted_jobs = Job.all.select do |job|
+      job.mover_id == session[:user_id]
+    end
+
+    render :my_jobs
   end
 
   # DELETE /jobs/1

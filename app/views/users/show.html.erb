@@ -1,3 +1,5 @@
+<h1> <%= @user.name %>'s Profile</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -15,10 +17,12 @@
   <%= @user.gender %>
 </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @user.address %>
-</p>
+<% if @user.id == session[:user_id] %>
+  <p>
+    <strong>Address:</strong>
+    <%= @user.address %>
+  </p>
+<% end %>
 
 <p>
   <strong>Bio:</strong>
