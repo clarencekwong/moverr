@@ -26,7 +26,9 @@
 
   <div class="field">
     <%= form.label "Furniture" %>
-    <%= form.collection_check_boxes :furniture_ids, Furniture.all, :id, :category %>
+    <%= form.collection_check_boxes :furniture_ids, Furniture.all, :id, :category do |f| %>
+      <%= f.label(class: "checkbox_container light") { f.check_box + " " + f.text } %>
+    <% end %>
   </div>
 
   <div class="field">
