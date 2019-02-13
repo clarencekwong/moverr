@@ -1,7 +1,8 @@
 class MainsController < ApplicationController
+  skip_before_action :authorized, only: [:home]
 
   def home
-    @user = User.find(session[:user_id])
+    @user = User.find_by(id: session[:user_id])
   end
 
   def login

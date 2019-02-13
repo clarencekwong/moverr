@@ -1,6 +1,10 @@
 <h1>Welcome to Moverr!</h1>
+<% if @user %>
 <p>Hi <%= @user.name %> (<%= @user.id %>)</p>
 
 <p>Here are your jobs ...</p>
 
 <p>Nearby jobs ...</p>
+<% end %>
+
+<p>You can ask someone to takeover the things you don't want.</p>
