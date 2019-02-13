@@ -67,10 +67,15 @@ class JobsController < ApplicationController
   end
 
   def my_jobs
-    @jobs = Job.all.select do |job|
-      job.mover_id == session[:user_id] || job.poster_id == session[:user_id]
+    @posted_jobs = Job.all.select do |job|
+      job.poster_id == session[:user_id]
     end
-    render :index
+
+    @accepted_jobs = Job.all.select do |job|
+      job.mover_id == session[:user_id]
+    end
+
+    render :my_jobs
   end
 
   # DELETE /jobs/1
