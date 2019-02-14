@@ -64,7 +64,9 @@
     <strong>Bio:</strong>
     <%= @user.bio %>
   </p>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %> |
-  <%= link_to 'Delete Account', @user, method: :delete, data: { confirm: 'Are you sure?'} %>
+  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-outline-secondary" %>
+  <%= link_to 'Back', users_path, class: "btn btn-outline-secondary" %>
+  <% if @user.id == session[:user_id] %>
+    <%= link_to 'Delete Account', @user, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-outline-secondary" %>
+  <% end %>
 </div>
