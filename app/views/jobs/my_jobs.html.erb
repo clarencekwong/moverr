@@ -18,7 +18,7 @@
 
 <br>
 <%= button_to 'Post a New Pickup', new_job_path, method: :get, class: "btn btn-outline-secondary" %>
-<br><br>
+<br>
 
 <h4>Accepted Pickups</h4>
 <% @accepted_jobs.each_slice(3) do |jobs| %>
@@ -35,3 +35,32 @@
 
 <br>
 <%= button_to 'Find a New Pickup', jobs_path, method: :get, class: "btn btn-outline-secondary" %>
+
+<br>
+
+
+<h4>Past Posts</h4>
+<% @archived_posts.each_slice(3) do |jobs| %>
+  <div class="row">
+    <% jobs.each do |job| %>
+      <div class="col-sm-3 card">
+        <%= link_to job.title, job %>
+        <%= link_to job.date.time.strftime("%b %d, %Y"), job %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<br>
+
+<h4>Past Pickups</h4>
+<% @archived_jobs.each_slice(3) do |jobs| %>
+  <div class="row">
+    <% jobs.each do |job| %>
+      <div class="col-sm-3 card">
+        <%= link_to job.title, job %>
+        <%= link_to job.date.time.strftime("%b %d, %Y"), job %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

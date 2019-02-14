@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :accept, :complete, :cancel, :uncancel]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :accept, :complete, :cancel, :uncancel, :archived]
   skip_before_action :authorized, only: [:index]
 
   # GET /jobs
@@ -85,10 +85,17 @@ class JobsController < ApplicationController
     redirect_to @job
   end
 
-  def my_jobs
-    @posted_jobs = User.find(session[:user_id]).posted_jobs
-    @accepted_jobs = User.find(session[:user_id]).mover_jobs
+  def archived
+    @job.status = "Archived"
+    @job.save
+    redirect_to my_jobs_path
+  end
 
+  def my_jobs
+    @posted_jobs = User.find(session[:user_id]).posted_jobs.where.not(status: "Archived")
+    @accepted_jobs = User.find(session[:user_id]).mover_jobs.where.not(status: "Archived")
+    @archived_posts = User.find(session[:user_id]).posted_jobs.where(status: "Archived")
+    @archived_jobs = User.find(session[:user_id]).mover_jobs.where(status: "Archived")
     render :my_jobs
   end
 

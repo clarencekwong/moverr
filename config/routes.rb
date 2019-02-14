@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   patch '/jobs/:id/complete', to: 'jobs#complete', as: 'complete'
   patch '/jobs/:id/cancel', to: 'jobs#cancel', as: 'cancel'
   patch '/jobs/:id/uncancel', to: 'jobs#uncancel', as: 'uncancel'
+  patch '/jobs/:id/archive', to: 'jobs#archived', as: 'archive'
   get '/jobs/my-jobs', to: 'jobs#my_jobs', as: 'my-jobs'
   resources :jobs
   resources :users, except: [:index]
