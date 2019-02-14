@@ -8,101 +8,109 @@
   <% end %>
   <%= @job.status %> Pickup
   </h1>
+  <div class="row">
+      <div class="col-md-8">
+        <p>
+          <strong>Title:</strong>
+          <%= @job.title %>
+        </p>
 
-  <p>
-    <strong>Title:</strong>
-    <%= @job.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @job.description %>
-  </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @job.description %>
+        </p>
 
 
-  <p>
-    <strong>Date:</strong>
-    <%= @job.date.time.strftime("%b %d, %Y at %I:%M%P") %>
-  </p>
+        <p>
+          <strong>Date:</strong>
+          <%= @job.date.time.strftime("%b %d, %Y at %I:%M%P") %>
+        </p>
 
-  <p>
-    <strong>Status:</strong>
-    <%= @job.status %>
-  </p>
+        <p>
+          <strong>Status:</strong>
+          <%= @job.status %>
+        </p>
 
-  <p>
-    <strong>Furnitures:</strong>
-    <% @job.furnitures.each do |furn| %>
-      <%= furn.category %>
-    <% end %>
-  </p>
+        <p>
+          <strong>Furnitures:</strong>
+          <% @job.furnitures.each do |furn| %>
+            <%= furn.category %>
+          <% end %>
+        </p>
 
-  <% if @job.mover && @job.mover.id != session[:user_id] %>
-    <p>
-      <strong>Mover:</strong>
-        <%= @job.mover.name %> <%= link_to "(profile)", user_path(@job.mover) %>
-    </p>
-  <% elsif @job.mover && @job.mover.id == session[:user_id] %>
-  <p>
-    <strong>Mover:</strong>
-      You!
-  </p>
-  <% end %>
+        <% if @job.mover && @job.mover.id != session[:user_id] %>
+          <p>
+            <strong>Mover:</strong>
+              <%= @job.mover.name %> <%= link_to "(profile)", user_path(@job.mover) %>
+          </p>
+        <% elsif @job.mover && @job.mover.id == session[:user_id] %>
+        <p>
+          <strong>Mover:</strong>
+            You!
+        </p>
+        <% end %>
 
-  <% if @job.poster.id != session[:user_id] %>
-    <p>
-      <strong>Poster:</strong>
-        <%= @job.poster.name %> <%= link_to "(profile)", user_path(@job.poster) %>
-    </p>
-  <% elsif @job.poster.id == session[:user_id] %>
-  <p>
-    <strong>Poster:</strong>
-      You!
-  </p>
-  <% end %>
+        <% if @job.poster.id != session[:user_id] %>
+          <p>
+            <strong>Poster:</strong>
+              <%= @job.poster.name %> <%= link_to "(profile)", user_path(@job.poster) %>
+          </p>
+        <% elsif @job.poster.id == session[:user_id] %>
+        <p>
+          <strong>Poster:</strong>
+            You!
+        </p>
+        <% end %>
 
-  <% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
-    <p>
-      <strong> Address:</strong>
-        <%= @job.poster.address %>
-    </p>
-    <p>
-      <strong> Phone Number:</strong>
-        <%= @job.poster.phone_number %>
-    </p>
-    <p>
-      <strong> Email:</strong>
-        <%= @job.poster.email %>
-    </p>
-  <% end %>
-  <div class="row" style="margin: 1%;">
-    <% if @job.poster.id == session[:user_id] && @job.status != 'Completed' %>
-      <%= button_to 'Edit', edit_job_path(@job), action: 'edit', method: :get, class: "btn btn-outline-secondary" %>
-    <% end %>
+        <% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
+          <p>
+            <strong> Address:</strong>
+              <%= @job.poster.address %>
+          </p>
+          <p>
+            <strong> Phone Number:</strong>
+              <%= @job.poster.phone_number %>
+          </p>
+          <p>
+            <strong> Email:</strong>
+              <%= @job.poster.email %>
+          </p>
+        <% end %>
+      </div>
+      <div class="col-xm-4">
+        <iframe width="300" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=<%= @job.poster.address %>&key=AIzaSyAo2JzMkz3lUtKVH1nyMncrZnAcmHZDDis" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="row">
+      <% if @job.poster.id == session[:user_id] && @job.status != 'Completed' %>
+        <%= button_to 'Edit', edit_job_path(@job), action: 'edit', method: :get, class: "btn btn-outline-secondary" %>
+      <% end %>
 
-    <% if @job.poster.id != session[:user_id] && @job.status == 'Pending' %>
-      <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch, class: "btn btn-outline-secondary" %>
-    <% end %>
+      <% if @job.poster.id != session[:user_id] && @job.status == 'Pending' %>
+        <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch, class: "btn btn-outline-secondary" %>
+      <% end %>
 
-    <% if (@job.poster_id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status == 'Accepted' %>
-      <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch, class: "btn btn-outline-secondary" %>
-    <% end %>
+      <% if (@job.poster_id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status == 'Accepted' %>
+        <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch, class: "btn btn-outline-secondary" %>
+      <% end %>
 
-    <% if (@job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status != "Canceled" %>
-      <%= button_to "Cancel Job", cancel_path(@job), action: 'cancel', method: :patch, class: "btn btn-outline-secondary" %>
-    <% end %>
+      <% if (@job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status != "Canceled" %>
+        <%= button_to "Cancel Job", cancel_path(@job), action: 'cancel', method: :patch, class: "btn btn-outline-secondary" %>
+      <% end %>
 
-    <% if @job.poster.id == session[:user_id] && @job.status == "Canceled" %>
-      <%= button_to "Job's Back On", uncancel_path(@job), action: 'uncancel', method: :patch, class: "btn btn-outline-secondary" %>
-      <%= button_to "Delete Job", job_path, method: :delete, class: "btn btn-outline-secondary"%>
-    <% end %>
+      <% if @job.poster.id == session[:user_id] && @job.status == "Canceled" %>
+        <%= button_to "Job's Back On", uncancel_path(@job), action: 'uncancel', method: :patch, class: "btn btn-outline-secondary" %>
+        <%= button_to "Delete Job", job_path, method: :delete, class: "btn btn-outline-secondary"%>
+      <% end %>
 
-    <% if @job.poster.id == session[:user_id] && @job.status == "Completed" %>
-      <%= button_to "Archive", archive_path(@job), action: 'archived', method: :patch, class: "btn btn-outline-secondary" %>
-    <% end %>
-  </div>
+      <% if @job.poster.id == session[:user_id] && @job.status == "Completed" %>
+        <%= button_to "Archive", archive_path(@job), action: 'archived', method: :patch, class: "btn btn-outline-secondary" %>
+      <% end %>
+    </div>
 </div>
+
 <br>
+
 <div class="job-card">
   <% if @job.status == "Completed" %>
     <h3>Reviews</h3>
