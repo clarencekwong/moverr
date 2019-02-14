@@ -4,11 +4,10 @@ Rails.application.routes.draw do
   patch '/jobs/:id/accept', to: 'jobs#accept', as: 'accept'
   patch '/jobs/:id/complete', to: 'jobs#complete', as: 'complete'
   patch '/jobs/:id/cancel', to: 'jobs#cancel', as: 'cancel'
-  patch '/jobs/:id/uncancel', to: 'jobs#uncancel', as: 'uncancel' 
+  patch '/jobs/:id/uncancel', to: 'jobs#uncancel', as: 'uncancel'
   get '/jobs/my-jobs', to: 'jobs#my_jobs', as: 'my-jobs'
   resources :jobs
-  resources :furnitures, only: [:new, :index]
-  resources :users
+  resources :users, except: [:index]
   root :to => "mains#home"
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

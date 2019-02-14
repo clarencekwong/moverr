@@ -1,6 +1,6 @@
 body {
   background-color: #fff;
-  color: #333;
+  color: black;
   margin: 33px;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -26,10 +26,6 @@ a {
     color: #666;
   }
 
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
 }
 
 th {

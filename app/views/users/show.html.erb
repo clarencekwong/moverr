@@ -1,56 +1,70 @@
-<h1> <%= @user.name %>'s Profile</h1>
+<h1><%= @user.name %>'s Profile</h1>
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="card col">
+      <div class="card-body">
+        <strong>Jobs Posted:</strong>
+        <%= @user.jobs_posted %>
+      </div>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @user.gender %>
-</p>
+    <div class="card col">
+      <div class="card-body">
+        <strong>Jobs Moved:</strong>
+        <%= @user.jobs_moved %>
+      </div>
+    </div>
 
-<% if @user.id == session[:user_id] %>
+    <div class="card col">
+      <div class="card-body">
+        <strong>Average Rating:</strong>
+        <%= @user.user_rating %>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="job-card">
   <p>
-    <strong>Address:</strong>
-    <%= @user.address %>
+    <strong>Username:</strong>
+    <%= @user.username %>
   </p>
+
   <p>
-    <strong>Phone Number:</strong>
-    <%= @user.phone_number %>
+    <strong>Name:</strong>
+    <%= @user.name %>
   </p>
-<% end %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p>
+    <strong>Gender:</strong>
+    <%= @user.gender %>
+  </p>
 
-<p>
-  <strong>Bio:</strong>
-  <%= @user.bio %>
-</p>
+  <% if @user.id == session[:user_id] %>
+    <p>
+      <strong>Address:</strong>
+      <%= @user.address %>
+    </p>
+    <p>
+      <strong>Phone Number:</strong>
+      <%= @user.phone_number %>
+    </p>
+  <% end %>
 
-<p>
-  <strong>Jobs Posted:</strong>
-  <%= @user.jobs_posted %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <strong>Jobs Moved:</strong>
-  <%= @user.jobs_moved %>
-</p>
-
-<p>
-  <strong>Average Rating:</strong>
-  <%= @user.user_rating %>
-</p>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <p>
+    <strong>Bio:</strong>
+    <%= @user.bio %>
+  </p>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %> |
+  <%= link_to 'Delete Account', @user, method: :delete, data: { confirm: 'Are you sure?'} %>
+</div>

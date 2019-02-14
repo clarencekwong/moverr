@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  validates :username, :name, presence: true
+  validates :username, :name, :email, :phone_number, presence: true
   validates :username, :email, :phone_number, uniqueness: true
 
   has_many :posted_jobs, class_name: "Job", foreign_key: "poster_id"

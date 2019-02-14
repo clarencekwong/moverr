@@ -3,52 +3,34 @@
 <h1>My Jobs</h1>
 
 <h4>Posted Jobs</h4>
-<table style="width:85%;">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posted_jobs.each do |job| %>
-      <tr>
-        <td><%= link_to job.title, job %></td>
-        <td><%= link_to job.date.time.strftime("%b %d, %Y at %I:%M%P"), job %></td>
-        <td><%= link_to job.status, job %></td>
-      </tr>
+<% @posted_jobs.each_slice(3) do |jobs| %>
+  <div class="row">
+    <% jobs.each do |job| %>
+      <div class="col-sm-3 card ">
+        <%= link_to job.title, job %>
+        <%= link_to job.date.time.strftime("%b %d, %Y at %I:%M%P"), job %>
+        <%= link_to job.status, job %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
 <br>
-<%= link_to 'Post a New Job', new_job_path %>
+<%= button_to 'Post a New Job', new_job_path, method: :get, class: "btn btn-outline-secondary" %>
 <br><br>
 
 <h4>Accepted Jobs</h4>
-<table style="width:85%;">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @accepted_jobs.each do |job| %>
-    <tr>
-      <td><%= link_to job.title, job %></td>
-      <td><%= link_to job.date.time.strftime("%b %d, %Y at %I:%M%P"), job %></td>
-      <td><%= link_to job.status, job %></td>
-    </tr>
+<% @accepted_jobs.each_slice(3) do |jobs| %>
+  <div class="row">
+    <% jobs.each do |job| %>
+      <div class="col-sm-3 card ">
+        <%= link_to job.title, job %>
+        <%= link_to job.date.time.strftime("%b %d, %Y at %I:%M%P"), job %>
+        <%= link_to job.status, job %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
 <br>
-<%= link_to 'Find a New Job', jobs_path %>
+<%= button_to 'Find a New Job', jobs_path, method: :get, class: "btn btn-outline-secondary" %>
