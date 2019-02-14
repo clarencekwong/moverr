@@ -58,6 +58,7 @@
 <% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
   <p>
     <strong> Address:</strong>
+      <%= byebug %>
       <%= @job.poster.address %>
   </p>
   <p>
