@@ -1,122 +1,126 @@
 <p id="notice"><%= notice %></p>
-
-<h1>
-<% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
-  Your
-<% else %>
-  <%= @job.poster.name %>'s
-<% end %>
-<%= @job.status %> Job
-</h1>
-
-<p>
-  <strong>Title:</strong>
-  <%= @job.title %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @job.date.time.strftime("%b %d, %Y at %I:%M%P") %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @job.status %>
-</p>
-
-<p>
-  <strong>Furnitures:</strong>
-  <% @job.furnitures.each do |furn| %>
-    <%= furn.category %>
+<div class="job-card">
+  <h1>
+  <% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
+    Your
+  <% else %>
+    <%= @job.poster.name %>'s
   <% end %>
-</p>
+  <%= @job.status %> Job
+  </h1>
 
-<% if @job.mover && @job.mover.id != session[:user_id] %>
+  <p>
+    <strong>Title:</strong>
+    <%= @job.title %>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <%= @job.date.time.strftime("%b %d, %Y at %I:%M%P") %>
+  </p>
+
+  <p>
+    
+  <strong>Status:</strong>
+    <%= @job.status %>
+  </p>
+
+  <p>
+    <strong>Furnitures:</strong>
+    <% @job.furnitures.each do |furn| %>
+      <%= furn.category %>
+    <% end %>
+  </p>
+
+  <% if @job.mover && @job.mover.id != session[:user_id] %>
+    <p>
+      <strong>Mover:</strong>
+        <%= @job.mover.name %> <%= link_to "(profile)", user_path(@job.mover) %>
+    </p>
+  <% elsif @job.mover && @job.mover.id == session[:user_id] %>
   <p>
     <strong>Mover:</strong>
-      <%= @job.mover.name %> <%= link_to "(profile)", user_path(@job.mover) %>
+      You!
   </p>
-<% elsif @job.mover && @job.mover.id == session[:user_id] %>
-<p>
-  <strong>Mover:</strong>
-    You!
-</p>
-<% end %>
+  <% end %>
 
-<% if @job.poster.id != session[:user_id] %>
+  <% if @job.poster.id != session[:user_id] %>
+    <p>
+      <strong>Poster:</strong>
+        <%= @job.poster.name %> <%= link_to "(profile)", user_path(@job.poster) %>
+    </p>
+  <% elsif @job.poster.id == session[:user_id] %>
   <p>
     <strong>Poster:</strong>
-      <%= @job.poster.name %> <%= link_to "(profile)", user_path(@job.poster) %>
+      You!
   </p>
-<% elsif @job.poster.id == session[:user_id] %>
-<p>
-  <strong>Poster:</strong>
-    You!
-</p>
-<% end %>
+  <% end %>
 
-<% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
-  <p>
-    <strong> Address:</strong>
-      <%= byebug %>
-      <%= @job.poster.address %>
-  </p>
-  <p>
-    <strong> Phone Number:</strong>
-      <%= @job.poster.phone_number %>
-  </p>
-  <p>
-    <strong> Email:</strong>
-      <%= @job.poster.email %>
-  </p>
-<% end %>
+  <% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) %>
+    <p>
+      <strong> Address:</strong>
+        <%= @job.poster.address %>
+    </p>
+    <p>
+      <strong> Phone Number:</strong>
+        <%= @job.poster.phone_number %>
+    </p>
+    <p>
+      <strong> Email:</strong>
+        <%= @job.poster.email %>
+    </p>
+  <% end %>
+  <div class="row" style="margin: 1%;">
+    <%= button_to 'Edit', edit_job_path(@job), action: 'edit', method: :get, class: "btn btn-outline-secondary" %>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+    <% if @job.poster.id != session[:user_id] && @job.status == 'Pending' %>
+      <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch, class: "btn btn-outline-secondary" %>
+    <% end %>
 
-<% if @job.poster.id != session[:user_id] && @job.status == 'Pending' %>
-  <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch %>
-<% end %>
+    <% if (@job.poster_id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status == 'Accepted' %>
+      <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch, class: "btn btn-outline-secondary" %>
+    <% end %>
 
-<% if (@job.poster_id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status == 'Accepted' %>
-  <%= button_to "Job Complete", complete_path(@job), action: 'complete', method: :patch %>
-<% end %>
+    <% if (@job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id])) && @job.status != "Canceled" %>
+      <%= button_to "Cancel Job", cancel_path(@job), action: 'cancel', method: :patch, class: "btn btn-outline-secondary" %>
+    <% end %>
 
-<% if @job.poster.id == session[:user_id] || (@job.mover && @job.mover.id == session[:user_id]) && @job.status != "Canceled" %>
-  <%= button_to "Cancel Job", cancel_path(@job), action: 'cancel', method: :patch %>
-<% end %>
-
-<% if @job.poster.id == session[:user_id] && @job.status == "Canceled" %>
-  <%= button_to "Job's Back On", uncancel_path(@job), action: 'uncancel', method: :patch %>
-<% end %>
-
-<% if @job.status == "Completed" %>
-  <h3>Reviews</h3>
-
-  <div>
-    <% @job.reviews.each do |review| %>
-      <p>
-      <% review.rating.times do %>
-        <%= "⭐" %>
-      <% end %><br>
-      <%= review.content %>
-      -- <%= link_to review.user.username, review.user %></p><br>
+    <% if @job.poster.id == session[:user_id] && @job.status == "Canceled" %>
+      <%= button_to "Job's Back On", uncancel_path(@job), action: 'uncancel', method: :patch, class: "btn btn-outline-secondary" %>
+      <%= button_to "Delete Job", job_path, method: :delete, class: "btn btn-outline-secondary"%>
     <% end %>
   </div>
-<% end %>
+</div>
+<br>
+<div class="job-card">
+  <% if @job.status == "Completed" %>
+    <h3>Reviews</h3>
 
-<% if (session[:user_id] == @job.poster_id || session[:user_id] == @job.mover_id) && @job.status == "Completed" %>
-  <%= form_for @job.reviews.build do |f| %>
-    <%= f.hidden_field :job_id, :value => @job.id %>
-    <%= f.hidden_field :user_id, :value => session[:user_id] %>
-    <%= f.label "Write a Review" %>
-    <%= f.text_area :content%><br>
-    <%= f.label :rating %>
-    <%= f.radio_button :rating, 1 %>
-    <%= f.radio_button :rating, 2 %>
-    <%= f.radio_button :rating, 3 %>
-    <%= f.radio_button :rating, 4 %>
-    <%= f.radio_button :rating, 5 %><br><br>
-    <%= f.submit %>
+    <div>
+      <% @job.reviews.each do |review| %>
+        <p>
+        <% review.rating.times do %>
+          <%= "⭐" %>
+        <% end %><br>
+        <%= review.content %>
+        -- <%= link_to review.user.username, review.user %></p><br>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+
+  <% if (session[:user_id] == @job.poster_id || session[:user_id] == @job.mover_id) && @job.status == "Completed" %>
+    <%= form_for @job.reviews.build do |f| %>
+      <%= f.hidden_field :job_id, :value => @job.id %>
+      <%= f.hidden_field :user_id, :value => session[:user_id] %>
+      <%= f.label "Write a Review" %>
+      <%= f.text_area :content%><br>
+      <%= f.label :rating %>
+      <%= f.radio_button :rating, 1 %>
+      <%= f.radio_button :rating, 2 %>
+      <%= f.radio_button :rating, 3 %>
+      <%= f.radio_button :rating, 4 %>
+      <%= f.radio_button :rating, 5 %><br><br>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
+</div>

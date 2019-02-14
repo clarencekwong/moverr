@@ -8,4 +8,8 @@ class MainsController < ApplicationController
   def login
     @user = User.new
   end
+
+  def not_found
+    render :'404'
+  end
 end

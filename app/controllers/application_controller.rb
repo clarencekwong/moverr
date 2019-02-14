@@ -15,4 +15,14 @@ class ApplicationController < ActionController::Base
   def authorized
     redirect_to login_path unless logged_in?
   end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  rescue
+    render_404
+  end
+
+  def render_404
+    render file: "#{Rails.root}/app/views/mains/404", status: :not_found
+  end
 end
