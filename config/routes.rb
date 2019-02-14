@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :reviews
+  resources :reviews, only: [:index]
   patch '/jobs/:id/accept', to: 'jobs#accept', as: 'accept'
   patch '/jobs/:id/complete', to: 'jobs#complete', as: 'complete'
   patch '/jobs/:id/cancel', to: 'jobs#cancel', as: 'cancel'
@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/self', to: 'users#myself', as: 'self'
+
+  get '/:fail', to: 'mains#not_found'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

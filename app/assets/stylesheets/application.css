@@ -22,3 +22,8 @@
 .error-text {
   color: red;
 }
+
+.login-page, .error-page {
+  text-align: center;
+  margin-top: 5%;
+}

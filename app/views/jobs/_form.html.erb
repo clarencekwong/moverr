@@ -27,13 +27,18 @@
   <div class="field">
     <%= form.label "Furniture" %>
     <%= form.collection_check_boxes :furniture_ids, Furniture.all, :id, :category do |f| %>
-      <%= f.label(class: "checkbox_container light") { f.check_box + " " + f.text } %>
+      <%= f.label { f.check_box + " " + f.text } %>
     <% end %>
   </div>
 
   <div class="field">
     <%= form.label :date %>
     <%= form.datetime_select :date, start_year: 2019 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control"%>
   </div>
 
   <div class="actions">
