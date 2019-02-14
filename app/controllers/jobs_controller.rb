@@ -13,7 +13,7 @@ class JobsController < ApplicationController
         j.furnitures.include?(furniture)
       end
     else
-      @jobs = Job.all
+      @jobs = Job.all.where.not(status: "Archived")
     end
   end
 
