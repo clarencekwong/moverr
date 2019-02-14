@@ -6,13 +6,19 @@
   <% else %>
     <%= @job.poster.name %>'s
   <% end %>
-  <%= @job.status %> Job
+  <%= @job.status %> Pickup
   </h1>
 
   <p>
     <strong>Title:</strong>
     <%= @job.title %>
   </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @job.description %>
+  </p>
+
 
   <p>
     <strong>Date:</strong>
@@ -70,7 +76,9 @@
     </p>
   <% end %>
   <div class="row" style="margin: 1%;">
-    <%= button_to 'Edit', edit_job_path(@job), action: 'edit', method: :get, class: "btn btn-outline-secondary" %>
+    <% if @job.poster.id == session[:user_id] && @job.status != 'Completed' %>
+      <%= button_to 'Edit', edit_job_path(@job), action: 'edit', method: :get, class: "btn btn-outline-secondary" %>
+    <% end %>
 
     <% if @job.poster.id != session[:user_id] && @job.status == 'Pending' %>
       <%= button_to "Accept Job", accept_path(@job), action: 'accept', method: :patch, class: "btn btn-outline-secondary" %>

@@ -17,6 +17,23 @@ class User < ApplicationRecord
   end
 
   def user_rating
-    self.reviews.average(:rating)
+    self.other_people_ratings_for_my_jobs.inject(0.0) { |sum, el| sum + el } / self.other_people_ratings_for_my_jobs.size
+  end
+
+  def my_jobs
+    my_list_of_jobs = []
+    my_list_of_jobs << self.mover_jobs
+    my_list_of_jobs << self.posted_jobs
+    my_list_of_jobs.flatten
+  end
+
+  def other_people_ratings_for_my_jobs
+    ratings = []
+    self.my_jobs.each do |job|
+      job.reviews.where.not(user_id: self.id).each do |review|
+        ratings << review.rating
+      end
+    end
+    ratings
   end
 end
