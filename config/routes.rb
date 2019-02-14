@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :reviews, only: [:index]
+  resources :reviews, only: [:new, :create]
   patch '/jobs/:id/accept', to: 'jobs#accept', as: 'accept'
   patch '/jobs/:id/complete', to: 'jobs#complete', as: 'complete'
   patch '/jobs/:id/cancel', to: 'jobs#cancel', as: 'cancel'
