@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :accept, :complete, :cancel, :uncancel]
   skip_before_action :authorized, only: [:index]
 
   # GET /jobs
@@ -52,7 +52,6 @@ class JobsController < ApplicationController
   end
 
   def accept
-    @job = Job.find(params[:id])
     @job.mover_id = session[:user_id]
     @job.status = "Accepted"
     @job.save
@@ -60,14 +59,12 @@ class JobsController < ApplicationController
   end
 
   def complete
-    @job = Job.find(params[:id])
     @job.status = "Completed"
     @job.save
     redirect_to @job
   end
 
   def cancel
-    @job = Job.find(params[:id])
     if @job.poster.id == session[:user_id]
       @job.status = "Canceled"
     elsif @job.mover.id == session[:user_id]
@@ -79,7 +76,6 @@ class JobsController < ApplicationController
   end
 
   def uncancel
-    @job = Job.find(params[:id])
     if @job.mover
       @job.status = "Accepted"
     else
@@ -90,13 +86,8 @@ class JobsController < ApplicationController
   end
 
   def my_jobs
-    @posted_jobs = Job.all.select do |job|
-      job.poster_id == session[:user_id]
-    end
-
-    @accepted_jobs = Job.all.select do |job|
-      job.mover_id == session[:user_id]
-    end
+    @posted_jobs = User.find(session[:user_id]).posted_jobs
+    @accepted_jobs = User.find(session[:user_id]).mover_jobs
 
     render :my_jobs
   end
