@@ -5,7 +5,16 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    if params[:filter_status] && params[:filter_status] != "0"
+      @jobs = Job.where("status LIKE ?", "#{params[:filter_status]}")
+    elsif params[:filter_furniture] && params[:filter_furniture] != "0"
+      furniture = Furniture.find_by(category: "#{params[:filter_furniture]}")
+      @jobs = Job.all.select do |j|
+        j.furnitures.include?(furniture)
+      end
+    else
+      @jobs = Job.all
+    end
   end
 
   # GET /jobs/1
