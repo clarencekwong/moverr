@@ -86,9 +86,8 @@
 
     <% if @job.poster.id == session[:user_id] && @job.status == "Canceled" %>
       <%= button_to "Job's Back On", uncancel_path(@job), action: 'uncancel', method: :patch, class: "btn btn-outline-secondary" %>
+      <%= button_to "Delete Job", job_path, method: :delete, class: "btn btn-outline-secondary"%>
     <% end %>
-
-    <%= button_to "Delete Job", job_path, method: :delete, class: "btn btn-outline-secondary"%>
   </div>
 </div>
 <br>
