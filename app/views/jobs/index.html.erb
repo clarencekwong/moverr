@@ -2,6 +2,38 @@
 
 <h1>Jobs</h1>
 <div class="job-card">
+  <div class="filter-forms">
+    <%= form_tag(jobs_path, method: "get", class: "dropdown") %>
+      <label for="filter_status"><strong>Filter by status</strong></label>
+      <select name="filter_status">
+        <option value="0">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Completed">Completed</option>
+        <option value="Canceled">Canceled</option>
+      </select>
+    <%= submit_tag "Filter", class: "btn btn-outline-secondary small-btn" %>
+  </div>
+
+  <div class="filter-forms">
+    <%= form_tag(jobs_path, method: "get") %>
+      <label for="filter_furniture"><strong>Filter by furniture</strong></label>
+      <select name="filter_furniture">
+        <option value="0">All</option>
+        <option value="Sofa">Sofa</option>
+        <option value="Television">Television</option>
+        <option value="Bed">Bed</option>
+        <option value="Chair">Chair</option>
+        <option value="Shelf">Shelf</option>
+        <option value="Lamp">Lamp</option>
+        <option value="Table">Table</option>
+        <option value="Plant(s)">Plant(s)</option>
+        <option value="Curtain(s)">Curtain(s)</option>
+        <option value="Storage container">Storage container</option>
+      </select>
+    <%= submit_tag "Filter", class: "btn btn-outline-secondary small-btn" %>
+  </div>
+
   <table style="width:85%;">
     <thead>
       <tr>
