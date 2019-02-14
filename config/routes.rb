@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :feedbacks
   resources :reviews
   patch '/jobs/:id/accept', to: 'jobs#accept', as: 'accept'
   patch '/jobs/:id/complete', to: 'jobs#complete', as: 'complete'
