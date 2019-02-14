@@ -8,7 +8,7 @@
 
 
 10.times do
-  User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create(Faker::Creature::Animal.name), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::String.random, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
+  User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create("password"), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::Quotes::Shakespeare.king_richard_iii_quote, email: Faker::Internet.unique.email, phone_number: Faker::PhoneNumber.unique.phone_number)
 end
 
 User.create(username: "admin", password_digest: BCrypt::Password.create("1"), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::Quotes::Shakespeare.king_richard_iii_quote, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
@@ -24,3 +24,7 @@ Furniture.create(category: "Plant(s)")
 Furniture.create(category: "Curtain(s)")
 Furniture.create(category: "Storage container")
 Furniture.create(category: "Other")
+
+20.times do
+  Job.create(:title => "Git this #{Faker::House.room}", :date => "2199-02-13 16:00:00", :status => "Pending", :poster_id => Random.rand(10), furniture_ids: [Random.rand(1..4), Random.rand(5..8), Random.rand(9..11)])
+end
