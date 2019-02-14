@@ -1,10 +1,37 @@
-<h1>Welcome to Moverr!</h1>
 <% if @user %>
-<p>Hi <%= @user.name %></p>
+  <h1>Welcome, <%= @user.name %></h1>
 
-<p>Here are your jobs ...</p>
+  <h4>Here are your jobs ...</h4>
+  <div class="row">
+    <div class="col">
+      <h4>Posted:</h4>
+      <% @posted_jobs.each_slice(3) do |jobs| %>
+        <div class="row">
+          <% jobs.each do |job| %>
+            <div class="col-sm-5 card-home ">
+              <p><%= link_to job.title, job %></p>
+              <p><%= link_to job.date.time.strftime("%b %d, %Y"), job %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col">
+      <h4>Accepted:</h4>
+      <% @accepted_jobs.each_slice(3) do |jobs| %>
+        <div class="row">
+          <% jobs.each do |job| %>
+            <div class="col-sm-5 card-home ">
+              <p><%= link_to job.title, job %></p>
+              <p><%= link_to job.date.time.strftime("%b %d, %Y"), job %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
-<p>Nearby jobs ...</p>
+  </div>
+<% else %>
+  <h1>Welcome to Moverr!</h1>
+  <p>You can ask someone to takeover the things you don't want.</p>
 <% end %>
-
-<p>You can ask someone to takeover the things you don't want.</p>

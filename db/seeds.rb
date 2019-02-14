@@ -11,6 +11,8 @@
   User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create(Faker::Creature::Animal.name), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::String.random, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
 end
 
+User.create(username: "admin", password_digest: BCrypt::Password.create("1"), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::Quotes::Shakespeare.king_richard_iii_quote, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
+
 Furniture.create(category: "Sofa")
 Furniture.create(category: "Television")
 Furniture.create(category: "Bed")
@@ -21,3 +23,4 @@ Furniture.create(category: "Table")
 Furniture.create(category: "Plant(s)")
 Furniture.create(category: "Curtain(s)")
 Furniture.create(category: "Storage container")
+Furniture.create(category: "Other")

@@ -3,6 +3,10 @@ class MainsController < ApplicationController
 
   def home
     @user = User.find_by(id: session[:user_id])
+    if session[:user_id]
+      @posted_jobs = User.find(session[:user_id]).posted_jobs
+      @accepted_jobs = User.find(session[:user_id]).mover_jobs
+    end
   end
 
   def login
