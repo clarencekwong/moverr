@@ -14,11 +14,4 @@ RSpec.describe JobsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
-  # describe "POST #accept" do
-  #   it "associates mover with job" do
-  #     patch :accept_path(@job), params: { session: { user_id: @user.id } }
-  #     expect(@job.mover_id).to eq(@user.id)
-  #   end
-  # end
 end

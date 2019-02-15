@@ -61,6 +61,7 @@ class JobsController < ApplicationController
   end
 
   def accept
+    byebug
     @job.mover_id = session[:user_id]
     @job.status = "Accepted"
     @job.save
