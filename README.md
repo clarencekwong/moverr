@@ -15,3 +15,5 @@ When a user is browsing, they can "accept" a pickup, in which case the pickup's 
 Either the "poster" (the user who created the pickup) or the mover can mark the pickup "complete." The poster can cancel the pickup.
 
 Posters and movers can review a completed pickup using a 1-to-5 rating system and an optional description. These ratings are associated with the other user involved in the job, and an average rating is shown on each user's profile page.
+
+*We have specs.*
