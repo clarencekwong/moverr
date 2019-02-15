@@ -26,5 +26,5 @@ Furniture.create(category: "Storage container")
 Furniture.create(category: "Other")
 
 20.times do
-  Job.create(:title => "Git this #{Faker::House.room}", :date => "2199-02-13 16:00:00", :status => "Pending", :poster_id => Random.rand(10), furniture_ids: [Random.rand(1..4), Random.rand(5..8), Random.rand(9..11)])
+  Job.create(:title => "Git this #{Faker::House.room}", :date => "2199-02-13 16:00:00", description: Faker::Quotes::Shakespeare.hamlet_quote, :status => "Pending", :poster_id => Random.rand(10), furniture_ids: [Random.rand(1..4), Random.rand(5..8), Random.rand(9..11)])
 end
