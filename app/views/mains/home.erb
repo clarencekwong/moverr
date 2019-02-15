@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col">
       <h4>Posted:</h4>
-      <% @posted_jobs.each_slice(3) do |jobs| %>
+      <% @posted_jobs.each_slice(2) do |jobs| %>
         <div class="row">
           <% jobs.each do |job| %>
             <div class="col-sm-5 card-home ">
@@ -18,7 +18,7 @@
     </div>
     <div class="col">
       <h4>Accepted:</h4>
-      <% @accepted_jobs.each_slice(3) do |jobs| %>
+      <% @accepted_jobs.each_slice(2) do |jobs| %>
         <div class="row">
           <% jobs.each do |job| %>
             <div class="col-sm-5 card-home ">
