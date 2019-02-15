@@ -13,7 +13,7 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-puts "\n#####################\n#### Please Read ####\n##################### \n\nRun `rake db:test:prepare` in terminal if you're receiving unexpected errors \n\n#####################\n#####################\n#####################\n\n"
+puts "\n#####################\n#####################\n##################### \n\nRun `rake db:test:prepare` if you're receiving unexpected errors \n\n#####################\n#####################\n#####################\n\n"
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
