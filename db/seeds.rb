@@ -8,7 +8,7 @@
 
 
 10.times do
-  User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create("password"), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::Quotes::Shakespeare.king_richard_iii_quote, email: Faker::Internet.unique.email, phone_number: Faker::PhoneNumber.unique.phone_number)
+  User.create(username: Faker::Name.unique.name, password_digest: BCrypt::Password.create("password"), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.state, bio: Faker::Quotes::Shakespeare.king_richard_iii_quote, email: Faker::Internet.unique.email, phone_number: Faker::PhoneNumber.unique.phone_number)
 end
 
 User.create(username: "admin", password_digest: BCrypt::Password.create("1"), name: Faker::Name.unique.name, gender: Faker::Gender.binary_type, address: Faker::Address.city, bio: Faker::Quotes::Shakespeare.king_richard_iii_quote, email: Faker::Internet.email, phone_number: Faker::PhoneNumber)
